@@ -18,6 +18,10 @@ public class Brique extends Rectangle {
         this.resistance = 1;
     }
 
+    public void takeDamage(int damage) {
+        setResistance(getResistance() - damage);
+    }
+
     public int getResistance() {
         return resistance;
     }

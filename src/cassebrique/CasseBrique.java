@@ -51,9 +51,7 @@ public class CasseBrique extends Canvas implements KeyListener {
     public void lancerUnePartie() throws InterruptedException {
 
         listeBalle = new ArrayList<>();
-        listeBalle.add(new Balle(100,100,3,4));
-        listeBalle.add(new Balle(200,100,2,3));
-        listeBalle.add(new Balle(100,200,1,2));
+        listeBalle.add(new Balle(100,400,5,4));
 
         barre = new Barre(
                 CasseBrique.LARGEUR / 2 - Barre.largeurDefaut / 2,
@@ -85,12 +83,18 @@ public class CasseBrique extends Canvas implements KeyListener {
             for(Balle balle : listeBalle) {
                 balle.deplacer();
                 balle.checkBarreCollision(barre);
+                for (int i = listeBrique.size() - 1; i >= 0 ; i--) {
+                    balle.checkBriqueCollision(listeBrique.get(i));
+                    if (listeBrique.get(i).getResistance() <= 0){
+                        listeBrique.remove(i);
+                    }
+                }
                 balle.dessiner(dessin);
             }
 
             barre.dessiner(dessin);
 
-            for(Brique brique : listeBrique) {
+            for (Brique brique : listeBrique) {
                 brique.dessiner(dessin);
             }
 

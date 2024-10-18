@@ -10,18 +10,6 @@ public class Balle extends Sprite {
     protected int vitesseY;
     protected int diametre = 20;
 
-    public int getRightSide(){
-        return x + diametre;
-    }
-    public int getLeftSide(){
-        return x;
-    }
-    public int getUpSide(){
-        return y;
-    }
-    public int getDownSide(){
-        return y + diametre;
-    }
 
     private boolean rectangleVerticalOverlap(Rectangle rectangle){
         if (this.getDownSide() >= rectangle.getUpSide() && this.getUpSide() <= rectangle.getDownSide()){
@@ -47,10 +35,48 @@ public class Balle extends Sprite {
         }
     }
 
-    public void checkBarreCollision(Rectangle barre){
+    public void checkBarreCollision(Barre barre){
         if (checkRectangleCollision(barre)){
             this.y = barre.getUpSide() - this.diametre;
             this.vitesseY = -this.vitesseY;
+        }
+    }
+
+    public void checkBriqueCollision(Brique brique){
+        if (checkRectangleCollision(brique)){
+            boolean rightBrickSideCollision = this.getLeftSide() > brique.getRightSide() - 5;
+            boolean leftBrickSideCollision = this.getRightSide() < brique.getLeftSide() + 5;
+            boolean upBrickSideCollision = this.getDownSide() < brique.getUpSide() + 5;
+            boolean downBrickSideCollision = this.getUpSide() > brique.getDownSide() - 5;
+
+            boolean downRightBrickSideCollision = downBrickSideCollision && rightBrickSideCollision;
+            boolean downLeftBrickSideCollision = downBrickSideCollision && leftBrickSideCollision;
+            boolean upRightBrickSideCollision = upBrickSideCollision && rightBrickSideCollision;
+            boolean upLeftBrickSideCollision = upBrickSideCollision && leftBrickSideCollision;
+
+            if (downRightBrickSideCollision){
+                this.vitesseY = Math.abs(this.vitesseY);
+                this.vitesseX = Math.abs(this.vitesseX);
+            } else if (downLeftBrickSideCollision) {
+                this.vitesseY = Math.abs(this.vitesseY);
+                this.vitesseX = - Math.abs(this.vitesseX);
+            } else if (upRightBrickSideCollision) {
+                this.vitesseY = - Math.abs(this.vitesseY);
+                this.vitesseX = Math.abs(this.vitesseX);
+            } else if (upLeftBrickSideCollision) {
+                this.vitesseY = - Math.abs(this.vitesseY);
+                this.vitesseX = - Math.abs(this.vitesseX);
+            } else if (downBrickSideCollision) {
+                this.vitesseY = Math.abs(this.vitesseY);
+            } else if (upBrickSideCollision) {
+                this.vitesseY = -Math.abs(this.vitesseY);
+            } else if (leftBrickSideCollision) {
+                this.vitesseX = -Math.abs(this.vitesseX);
+            } else if (rightBrickSideCollision) {
+                this.vitesseX = Math.abs(this.vitesseX);
+            }
+
+            brique.takeDamage(1);
         }
     }
 
@@ -158,5 +184,31 @@ public class Balle extends Sprite {
 
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
+    }
+
+    public int getRightSide(){
+        return x + diametre;
+    }
+    public int getLeftSide(){
+        return x;
+    }
+    public int getUpSide(){
+        return y;
+    }
+    public int getDownSide(){
+        return y + diametre;
+    }
+
+    public void setDownSide(int y){
+        this.setY(y - this.diametre);
+    }
+    public void setRightSide(int x){
+        this.setX(x - this.diametre);
+    }
+    public void setLeftSide(int x){
+        this.setX(x);
+    }
+    public void setUpSide(int y){
+        this.setY(y);
     }
 }
