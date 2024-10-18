@@ -6,15 +6,13 @@ public abstract class Sprite {
 
     protected int x;
     protected int y;
-    protected Color couleur;
 
     public Sprite() {
     }
 
-    public Sprite(int x, int y, Color couleur) {
+    public Sprite(int x, int y) {
         this.x = x;
         this.y = y;
-        this.couleur = couleur;
     }
 
     public int getX() {
@@ -31,13 +29,5 @@ public abstract class Sprite {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public Color getCouleur() {
-        return couleur;
-    }
-
-    public void setCouleur(Color couleur) {
-        this.couleur = couleur;
     }
 }

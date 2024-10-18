@@ -4,11 +4,10 @@ import cassebrique.CasseBrique;
 
 import java.awt.*;
 
-public class Balle extends Sprite {
+public class Balle extends Rond {
 
     protected int vitesseX;
     protected int vitesseY;
-    protected int diametre = 20;
 
 
     private boolean rectangleVerticalOverlap(Rectangle rectangle){
@@ -84,9 +83,9 @@ public class Balle extends Sprite {
         super();
         this.x = this.nombreAleatoire(diametre,CasseBrique.LARGEUR - diametre);
         this.y = this.nombreAleatoire(400,500);
+        this.couleur = new Color(ratioAleatoire(), ratioAleatoire(), ratioAleatoire(0.4f,0.7f));
         this.vitesseX = 3;
         this.vitesseY = -3;
-        this.couleur = new Color(ratioAleatoire(), ratioAleatoire(), ratioAleatoire(0.4f,0.7f));
     }
 
     public Balle(int x, int y, int vitesseX, int vitesseY) {
@@ -127,16 +126,10 @@ public class Balle extends Sprite {
             vitesseX = -vitesseX;
         }
 
-        if(y >= CasseBrique.HAUTEUR - diametre || y <= 0) {
+        if(y <= 0) {
             vitesseY = -vitesseY;
         }
     }
-
-    public void dessiner(Graphics2D dessin) {
-        dessin.setColor(couleur);
-        dessin.fillOval(x,y,diametre,diametre);
-    }
-
 
     public int getX() {
         return x;

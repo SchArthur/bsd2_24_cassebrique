@@ -2,6 +2,7 @@ package cassebrique;
 
 import cassebrique.models.Balle;
 import cassebrique.models.Barre;
+import cassebrique.models.Bonus;
 import cassebrique.models.Brique;
 
 import javax.swing.*;
@@ -15,6 +16,7 @@ public class CasseBrique extends Canvas implements KeyListener {
     public JFrame fenetre = new JFrame();
     public ArrayList<Balle> listeBalle = new ArrayList<>();
     public ArrayList<Brique> listeBrique = new ArrayList<>();
+    public ArrayList<Bonus> listeBonus = new ArrayList<>();
     public Barre barre;
 
     public boolean pressRight = false;
@@ -86,6 +88,9 @@ public class CasseBrique extends Canvas implements KeyListener {
                 for (int i = listeBrique.size() - 1; i >= 0 ; i--) {
                     balle.checkBriqueCollision(listeBrique.get(i));
                     if (listeBrique.get(i).getResistance() <= 0){
+                        if (Math.random() < 0.1){
+                            listeBonus.add(new Bonus(listeBrique.get(i).getCenterX(), listeBrique.get(i).getDownSide(), 10));
+                        }
                         listeBrique.remove(i);
                     }
                 }
@@ -96,6 +101,15 @@ public class CasseBrique extends Canvas implements KeyListener {
 
             for (Brique brique : listeBrique) {
                 brique.dessiner(dessin);
+            }
+            for (int i = listeBonus.size() - 1; i >= 0 ; i--) {
+                if (listeBonus.get(i).checkBarreCollision(barre)){
+                    barre.collectBonus(listeBonus.get(i));
+                    listeBonus.remove(i);
+                    break;
+                }
+                listeBonus.get(i).deplacer();
+                listeBonus.get(i).dessiner(dessin);
             }
 
             // Inputs

@@ -29,11 +29,40 @@ public class Barre extends Rectangle {
         }
     }
 
+    public void collectBonus(Bonus bonus) {
+        if (bonus.isMalus()){
+            if (bonus.isTaille()){
+                this.largeur -= 15;
+                System.out.println("Taille -15");
+                System.out.println(this.largeur);
+            }
+            if (bonus.isVitesse()){
+                this.setVitesse(this.getVitesse() - 3);
+                System.out.println("Vitesse -3");
+                System.out.println(this.vitesse);
+            }
+        } else {
+            if (bonus.isTaille()){
+                this.largeur += 15;
+                System.out.println("Taille +15");
+                System.out.println(this.largeur);
+            }
+            if (bonus.isVitesse()){
+                this.setVitesse(this.getVitesse() + 3);
+                System.out.println("Vitesse +3");
+                System.out.println(this.vitesse);
+            }
+        }
+    }
+
     public int getVitesse() {
         return vitesse;
     }
 
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
+        if (this.vitesse <= 0){
+            this.vitesse = 1;
+        }
     }
 }

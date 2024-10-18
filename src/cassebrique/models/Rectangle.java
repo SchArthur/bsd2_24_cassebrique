@@ -6,11 +6,13 @@ public class Rectangle extends Sprite {
 
     protected int largeur;
     protected int hauteur;
+    protected Color couleur;
 
     public Rectangle(int x, int y, int largeur, int hauteur, Color couleur) {
-        super(x, y, couleur);
+        super(x, y);
         this.largeur = largeur;
         this.hauteur = hauteur;
+        this.couleur = couleur;
     }
 
     public void dessiner(Graphics2D dessin) {
