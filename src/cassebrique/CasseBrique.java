@@ -17,6 +17,9 @@ public class CasseBrique extends Canvas implements KeyListener {
     public ArrayList<Brique> listeBrique = new ArrayList<>();
     public Barre barre;
 
+    public boolean pressRight = false;
+    public boolean pressLeft = false;
+
     public static final int LARGEUR = 500;
     public static final int HAUTEUR = 700;
 
@@ -90,6 +93,14 @@ public class CasseBrique extends Canvas implements KeyListener {
                 brique.dessiner(dessin);
             }
 
+            // Inputs
+            if (pressLeft){
+                barre.deplacementGauche();
+            }
+            if (pressRight){
+                barre.deplacementDroite();
+            }
+
             dessin.dispose();
             this.getBufferStrategy().show();
 
@@ -110,16 +121,22 @@ public class CasseBrique extends Canvas implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            barre.deplacementDroite();
+            pressRight = true;
         }
 
         if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-            barre.deplacementGauche();
+            pressLeft = true;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            pressRight = false;
+        }
 
+        if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+            pressLeft = false;
+        }
     }
 }
