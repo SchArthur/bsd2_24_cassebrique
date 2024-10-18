@@ -10,6 +10,50 @@ public class Balle extends Sprite {
     protected int vitesseY;
     protected int diametre = 20;
 
+    public int getRightSide(){
+        return x + diametre;
+    }
+    public int getLeftSide(){
+        return x;
+    }
+    public int getUpSide(){
+        return y;
+    }
+    public int getDownSide(){
+        return y + diametre;
+    }
+
+    private boolean rectangleVerticalOverlap(Rectangle rectangle){
+        if (this.getDownSide() >= rectangle.getUpSide() && this.getUpSide() <= rectangle.getDownSide()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    private boolean rectangleHorizontalOverlap(Rectangle rectangle){
+        if (this.getRightSide() >= rectangle.getLeftSide() && this.getLeftSide() <= rectangle.getRightSide()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean checkRectangleCollision(Rectangle rectangle){
+        if (rectangleVerticalOverlap(rectangle) && rectangleHorizontalOverlap(rectangle)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void checkBarreCollision(Rectangle barre){
+        if (checkRectangleCollision(barre)){
+            this.y = barre.getUpSide() - this.diametre;
+            this.vitesseY = -this.vitesseY;
+        }
+    }
+
     public Balle() {
         super();
         this.x = this.nombreAleatoire(diametre,CasseBrique.LARGEUR - diametre);

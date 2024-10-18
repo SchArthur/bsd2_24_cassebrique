@@ -17,4 +17,18 @@ public class Rectangle extends Sprite {
         dessin.setColor(couleur);
         dessin.fillRect(x,y,largeur,hauteur);
     }
+
+    public int getRightSide(){
+        return x + largeur;
+    }
+    public int getLeftSide(){
+        return x;
+    }
+    public int getUpSide(){
+        return y;
+    }
+    public int getDownSide(){
+        return y + hauteur;
+    }
+
 }

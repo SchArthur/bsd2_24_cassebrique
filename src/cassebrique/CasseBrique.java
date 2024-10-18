@@ -84,6 +84,7 @@ public class CasseBrique extends Canvas implements KeyListener {
 
             for(Balle balle : listeBalle) {
                 balle.deplacer();
+                balle.checkBarreCollision(barre);
                 balle.dessiner(dessin);
             }
 
