@@ -53,7 +53,7 @@ public class CasseBrique extends Canvas implements KeyListener {
     public void lancerUnePartie() throws InterruptedException {
 
         listeBalle = new ArrayList<>();
-        listeBalle.add(new Balle(100,400,5,4));
+        listeBalle.add(new Balle(100,400,5,6));
 
         barre = new Barre(
                 CasseBrique.LARGEUR / 2 - Barre.largeurDefaut / 2,

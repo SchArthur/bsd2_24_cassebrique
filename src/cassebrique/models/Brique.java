@@ -22,14 +22,6 @@ public class Brique extends Rectangle {
         setResistance(getResistance() - damage);
     }
 
-    public int getCenterX(){
-        return this.x + this.largeur / 2;
-    }
-
-    public int getCenterY(){
-        return this.y + this.hauteur / 2;
-    }
-
     public int getResistance() {
         return resistance;
     }

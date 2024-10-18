@@ -33,4 +33,12 @@ public class Rectangle extends Sprite {
         return y + hauteur;
     }
 
+    public int getCenterX(){
+        return this.x + this.largeur / 2;
+    }
+
+    public int getCenterY(){
+        return this.y + this.hauteur / 2;
+    }
+
 }

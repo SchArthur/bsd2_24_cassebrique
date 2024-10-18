@@ -38,6 +38,9 @@ public class Balle extends Rond {
         if (checkRectangleCollision(barre)){
             this.y = barre.getUpSide() - this.diametre;
             this.vitesseY = -this.vitesseY;
+
+            int disctanceToCenter = this.x - barre.getCenterX();
+            this.vitesseX = disctanceToCenter / 10;
         }
     }
 

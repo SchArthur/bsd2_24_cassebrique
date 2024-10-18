@@ -32,8 +32,9 @@ public class Barre extends Rectangle {
     public void collectBonus(Bonus bonus) {
         if (bonus.isMalus()){
             if (bonus.isTaille()){
-                this.largeur -= 15;
-                System.out.println("Taille -15");
+                this.largeur -= 14;
+                this.x += 7;
+                System.out.println("Taille -14");
                 System.out.println(this.largeur);
             }
             if (bonus.isVitesse()){
@@ -43,13 +44,14 @@ public class Barre extends Rectangle {
             }
         } else {
             if (bonus.isTaille()){
-                this.largeur += 15;
-                System.out.println("Taille +15");
+                this.largeur += 14;
+                this.x -= 7;
+                System.out.println("Taille +14");
                 System.out.println(this.largeur);
             }
             if (bonus.isVitesse()){
                 this.setVitesse(this.getVitesse() + 3);
-                System.out.println("Vitesse +3");
+                System.out.println("Vitesse +4");
                 System.out.println(this.vitesse);
             }
         }
