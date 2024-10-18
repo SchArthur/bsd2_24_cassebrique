@@ -15,7 +15,7 @@ public class Brique extends Rectangle {
 
     public Brique(int x, int y, Color couleur) {
         super(x, y, largeurDefaut, hauteurDefaut , couleur);
-        this.resistance = 1;
+        this.resistance = nombreAleatoire(1,6);
     }
 
     public void takeDamage(int damage) {
@@ -28,5 +28,15 @@ public class Brique extends Rectangle {
 
     public void setResistance(int resistance) {
         this.resistance = resistance;
+    }
+
+    public void dessiner(Graphics2D dessin) {
+        super.dessiner(dessin);
+        dessin.setColor(Color.BLACK);
+        dessin.drawString(String.valueOf(resistance), x + largeurDefaut / 2 - 10, y + hauteurDefaut / 2 + 5);
+    }
+
+    protected int nombreAleatoire(int min, int max) {
+        return (int)(Math.random() * (max - min) + min);
     }
 }
